@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>motorurl.com</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Site navigation" id="sidebar">
+      <div class="brand">
+        <a class="brand__logo" href="#" id="homeLink" title="Home" aria-label="Home"></a>
+        <div class="brand__text">
+          <div class="brand__title">motorurl.com</div>
+          <a class="brand__homeLink" href="#" id="homeTextLink">Home</a>
+        </div>
+      </div>
+
+      <nav id="treeNav" class="tree" aria-label="Navigation tree"></nav>
+
+      <div class="sidebar__footer">
+        <span class="muted">Starter skeleton</span>
+      </div>
+    </aside>
+
+    <main class="main" aria-label="Main content">
+      <div class="main__bar">
+        <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <div id="breadcrumb" class="breadcrumb">Home</div>
+      </div>
+
+      <iframe id="contentFrame" class="contentFrame" title="Content frame" src="pages/home.html" loading="lazy"></iframe>
+    </main>
+  </div>
+
+  <script src="scripts/nav-data.js"></script>
+  <script src="scripts/nav.js"></script>
+  <script src="scripts/ui.js"></script>
+</body>
+</html>
