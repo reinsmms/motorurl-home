@@ -11,8 +11,13 @@
   const HOME_HREF = "pages/home.html";
   const HOME_LABEL = "Home";
 
-  function setBreadcrumb(label) { breadcrumb.textContent = label ? `Home / ${label}` : "Home"; }
-  function postPageMeta(meta) { try { frame.contentWindow?.postMessage({ type: "motorurl:pageMeta", meta }, "*"); } catch (_) {} }
+  function setBreadcrumb(label) {
+    breadcrumb.textContent = label ? `Home / ${label}` : "Home";
+  }
+
+  function postPageMeta(meta) {
+    try { frame.contentWindow?.postMessage({ type: "motorurl:pageMeta", meta }, "*"); } catch (_) {}
+  }
 
   function loadPage(href, label, meta) {
     frame.src = href;
@@ -41,6 +46,14 @@
     if (href === HOME_HREF) { loadPage(HOME_HREF, HOME_LABEL, {}); return true; }
 
     for (const branch of NAV) {
+      if (branch.href === href) {
+        loadPage(branch.href, branch.title, { showGalleryLink: false });
+        openBranch(branch.id, true);
+        return true;
+      }
+    }
+
+    for (const branch of NAV) {
       for (const item of (branch.items || [])) {
         if (item.href === href) {
           loadPage(item.href, item.title, item);
@@ -49,6 +62,7 @@
         }
       }
     }
+
     loadPage(href, href, {});
     return true;
   }
@@ -62,26 +76,44 @@
 
   function render() {
     navHost.innerHTML = "";
+
     NAV.forEach(branch => {
       const branchEl = document.createElement("section");
       branchEl.className = "branch";
       branchEl.setAttribute("data-id", branch.id);
       branchEl.setAttribute("data-open", branch.openByDefault ? "true" : "false");
 
-      const btn = document.createElement("button");
-      btn.className = "branch__toggle";
-      btn.type = "button";
-      btn.addEventListener("click", () => toggleBranch(branch.id));
+      const header = document.createElement("div");
+      header.className = "branchHeader";
+
+      const toggleBtn = document.createElement("button");
+      toggleBtn.className = "branch__toggleBtn";
+      toggleBtn.type = "button";
+      toggleBtn.title = "Expand/Collapse";
+      toggleBtn.setAttribute("aria-label", `Toggle ${branch.title}`);
+      toggleBtn.addEventListener("click", () => toggleBranch(branch.id));
 
       const chev = document.createElement("span");
       chev.className = "chev";
       chev.textContent = "▶";
+      toggleBtn.appendChild(chev);
 
-      const title = document.createElement("span");
-      title.className = "branch__title";
-      title.textContent = branch.title;
+      const titleLink = document.createElement("a");
+      titleLink.className = "branch__titleLink";
+      titleLink.href = "#";
+      titleLink.textContent = branch.title;
+      titleLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (branch.href) {
+          loadPage(branch.href, branch.title, { showGalleryLink: false });
+        } else {
+          toggleBranch(branch.id);
+        }
+        window.dispatchEvent(new CustomEvent("motorurl:navigate"));
+      });
 
-      btn.appendChild(chev); btn.appendChild(title);
+      header.appendChild(toggleBtn);
+      header.appendChild(titleLink);
 
       const itemsEl = document.createElement("div");
       itemsEl.className = "branch__items";
@@ -100,12 +132,16 @@
         itemsEl.appendChild(a);
       });
 
-      branchEl.appendChild(btn);
+      branchEl.appendChild(header);
       branchEl.appendChild(itemsEl);
       navHost.appendChild(branchEl);
     });
 
-    function goHome(e){ e?.preventDefault(); loadPage(HOME_HREF, HOME_LABEL, {}); window.dispatchEvent(new CustomEvent("motorurl:navigate")); }
+    function goHome(e){
+      e?.preventDefault();
+      loadPage(HOME_HREF, HOME_LABEL, {});
+      window.dispatchEvent(new CustomEvent("motorurl:navigate"));
+    }
     homeLogoLink?.addEventListener("click", goHome);
     homeTextLink?.addEventListener("click", goHome);
 

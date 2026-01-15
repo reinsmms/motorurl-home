@@ -89,3 +89,21 @@
   .backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
   body.menu-open .backdrop{display:block}
 }
+
+/* v1 updates: category links on top-level branches */
+.branchHeader{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:center;padding:6px 6px}
+.branch__toggleBtn{border:1px solid transparent;background:transparent;border-radius:10px;padding:6px;cursor:pointer;color:var(--text)}
+.branch__toggleBtn:hover{background:var(--hover);border-color:var(--line)}
+.branch__toggleBtn:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus)}
+.branch__titleLink{display:block;padding:8px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent;font-weight:600;font-size:13px}
+.branch__titleLink:hover{background:var(--hover);border-color:var(--line)}
+.branch__titleLink:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus)}
+
+/* Home page section links (larger than body text, smaller than title) */
+.homeSectionLink{
+  font-size:18px;
+  font-weight:650;
+  text-decoration:none;
+  color:var(--accent);
+}
+.homeSectionLink:hover{text-decoration:underline}
