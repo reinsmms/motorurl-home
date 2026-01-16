@@ -1,15 +1,19 @@
 // scripts/nav-data.js
-// Add/maintain nav structure here.
-// Each top-level branch can have an optional `href` that loads its category page.
+// True nested tree structure.
+// Node types:
+//  - { type:'branch', id, title, href?, openByDefault?, children:[...] }
+//  - { type:'link', title, href, galleryPath?, showGalleryLink? }
 
 window.MOTORURL_NAV = [
   {
+    "type": "branch",
     "id": "site",
     "title": "Site",
     "openByDefault": true,
     "href": "pages/site.html",
-    "items": [
+    "children": [
       {
+        "type": "link",
         "title": "Galleries",
         "href": "pages/gallery-index.html",
         "showGalleryLink": false
@@ -17,20 +21,26 @@ window.MOTORURL_NAV = [
     ]
   },
   {
+    "type": "branch",
     "id": "printing",
     "title": "3D Printing",
     "openByDefault": true,
     "href": "pages/3d-printing.html",
-    "items": [
+    "children": [
       {
+        "type": "branch",
+        "id": "filament",
         "title": "Filament",
+        "openByDefault": true,
         "href": "pages/filament.html",
-        "showGalleryLink": false
-      },
-      {
-        "title": "Material Resistance - Quick Reference",
-        "href": "pages/material-resistance-quick-reference.html",
-        "showGalleryLink": false
+        "children": [
+          {
+            "type": "link",
+            "title": "Material Resistance - Quick Reference",
+            "href": "pages/material-resistance-quick-reference.html",
+            "showGalleryLink": false
+          }
+        ]
       }
     ]
   }

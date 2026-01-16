@@ -5,6 +5,7 @@
   const breadcrumb = document.getElementById("breadcrumb");
   const homeLogoLink = document.getElementById("homeLink");
   const homeTextLink = document.getElementById("homeTextLink");
+
   const NAV = window.MOTORURL_NAV || [];
   if (!navHost || !frame) return;
 
@@ -23,19 +24,29 @@
     frame.src = href;
     setBreadcrumb(href === HOME_HREF ? HOME_LABEL : (label || href));
 
+    // highlight leaf links only
     navHost.querySelectorAll("a.navItem").forEach(a => {
       a.removeAttribute("aria-current");
       if (a.getAttribute("data-href") === href) a.setAttribute("aria-current", "page");
     });
 
+    // Persist current page in hash so it can be bookmarked
     location.hash = encodeURIComponent(href);
+
     frame.onload = () => postPageMeta(meta || {});
   }
 
-  function openBranch(branchId, open) {
-    const el = navHost.querySelector(`.branch[data-id="${branchId}"]`);
+  function openBranchById(id, open) {
+    const el = navHost.querySelector(`.branch[data-id="${id}"]`);
     if (!el) return;
     el.setAttribute("data-open", open ? "true" : "false");
+  }
+
+  function toggleBranchById(id) {
+    const el = navHost.querySelector(`.branch[data-id="${id}"]`);
+    if (!el) return;
+    const nowOpen = el.getAttribute("data-open") !== "true";
+    el.setAttribute("data-open", nowOpen ? "true" : "false");
   }
 
   function applyHashIfPresent() {
@@ -45,97 +56,115 @@
 
     if (href === HOME_HREF) { loadPage(HOME_HREF, HOME_LABEL, {}); return true; }
 
-    for (const branch of NAV) {
-      if (branch.href === href) {
-        loadPage(branch.href, branch.title, { showGalleryLink: false });
-        openBranch(branch.id, true);
-        return true;
+    let found = null;
+
+    function walk(nodes, parents) {
+      for (const n of nodes) {
+        if (!n) continue;
+        if (n.type === "branch") {
+          const nextParents = parents.concat(n);
+          if (n.href === href) {
+            found = { node: n, label: n.title, meta: { showGalleryLink: false }, parents };
+            return;
+          }
+          walk(n.children || [], nextParents);
+          if (found) return;
+        } else if (n.type === "link") {
+          if (n.href === href) {
+            found = { node: n, label: n.title, meta: n, parents };
+            return;
+          }
+        }
       }
     }
 
-    for (const branch of NAV) {
-      for (const item of (branch.items || [])) {
-        if (item.href === href) {
-          loadPage(item.href, item.title, item);
-          openBranch(branch.id, true);
-          return true;
-        }
-      }
+    walk(NAV, []);
+
+    if (found) {
+      (found.parents || []).forEach(p => openBranchById(p.id, true));
+      if (found.node?.type === "branch") openBranchById(found.node.id, true);
+      loadPage(found.node.href, found.label, found.meta);
+      return true;
     }
 
     loadPage(href, href, {});
     return true;
   }
 
-  function toggleBranch(branchId) {
-    const el = navHost.querySelector(`.branch[data-id="${branchId}"]`);
-    if (!el) return;
-    const nowOpen = el.getAttribute("data-open") !== "true";
-    el.setAttribute("data-open", nowOpen ? "true" : "false");
+  function renderTree(nodes, container) {
+    nodes.forEach(node => {
+      if (!node) return;
+
+      if (node.type === "branch") {
+        const branchEl = document.createElement("section");
+        branchEl.className = "branch";
+        branchEl.setAttribute("data-id", node.id);
+        branchEl.setAttribute("data-open", node.openByDefault ? "true" : "false");
+
+        const header = document.createElement("div");
+        header.className = "branchHeader";
+
+        const toggleBtn = document.createElement("button");
+        toggleBtn.className = "branch__toggleBtn";
+        toggleBtn.type = "button";
+        toggleBtn.title = "Expand/Collapse";
+        toggleBtn.setAttribute("aria-label", `Toggle ${node.title}`);
+        toggleBtn.addEventListener("click", () => toggleBranchById(node.id));
+
+        const chev = document.createElement("span");
+        chev.className = "chev";
+        chev.textContent = "▶";
+        toggleBtn.appendChild(chev);
+
+        const titleLink = document.createElement("a");
+        titleLink.className = "branch__titleLink";
+        titleLink.href = "#";
+        titleLink.textContent = node.title;
+        titleLink.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (node.href) {
+            loadPage(node.href, node.title, { showGalleryLink: false });
+          } else {
+            toggleBranchById(node.id);
+          }
+          window.dispatchEvent(new CustomEvent("motorurl:navigate"));
+        });
+
+        header.appendChild(toggleBtn);
+        header.appendChild(titleLink);
+
+        const childrenEl = document.createElement("div");
+        childrenEl.className = "branch__items";
+
+        renderTree(node.children || [], childrenEl);
+
+        branchEl.appendChild(header);
+        branchEl.appendChild(childrenEl);
+        container.appendChild(branchEl);
+        return;
+      }
+
+      if (node.type === "link") {
+        const a = document.createElement("a");
+        a.className = "navItem";
+        a.href = "#";
+        a.textContent = node.title;
+        a.setAttribute("data-href", node.href);
+
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          loadPage(node.href, node.title, node);
+          window.dispatchEvent(new CustomEvent("motorurl:navigate"));
+        });
+
+        container.appendChild(a);
+      }
+    });
   }
 
   function render() {
     navHost.innerHTML = "";
-
-    NAV.forEach(branch => {
-      const branchEl = document.createElement("section");
-      branchEl.className = "branch";
-      branchEl.setAttribute("data-id", branch.id);
-      branchEl.setAttribute("data-open", branch.openByDefault ? "true" : "false");
-
-      const header = document.createElement("div");
-      header.className = "branchHeader";
-
-      const toggleBtn = document.createElement("button");
-      toggleBtn.className = "branch__toggleBtn";
-      toggleBtn.type = "button";
-      toggleBtn.title = "Expand/Collapse";
-      toggleBtn.setAttribute("aria-label", `Toggle ${branch.title}`);
-      toggleBtn.addEventListener("click", () => toggleBranch(branch.id));
-
-      const chev = document.createElement("span");
-      chev.className = "chev";
-      chev.textContent = "▶";
-      toggleBtn.appendChild(chev);
-
-      const titleLink = document.createElement("a");
-      titleLink.className = "branch__titleLink";
-      titleLink.href = "#";
-      titleLink.textContent = branch.title;
-      titleLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (branch.href) {
-          loadPage(branch.href, branch.title, { showGalleryLink: false });
-        } else {
-          toggleBranch(branch.id);
-        }
-        window.dispatchEvent(new CustomEvent("motorurl:navigate"));
-      });
-
-      header.appendChild(toggleBtn);
-      header.appendChild(titleLink);
-
-      const itemsEl = document.createElement("div");
-      itemsEl.className = "branch__items";
-
-      (branch.items || []).forEach(item => {
-        const a = document.createElement("a");
-        a.className = "navItem";
-        a.href = "#";
-        a.textContent = item.title;
-        a.setAttribute("data-href", item.href);
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          loadPage(item.href, item.title, item);
-          window.dispatchEvent(new CustomEvent("motorurl:navigate"));
-        });
-        itemsEl.appendChild(a);
-      });
-
-      branchEl.appendChild(header);
-      branchEl.appendChild(itemsEl);
-      navHost.appendChild(branchEl);
-    });
+    renderTree(NAV, navHost);
 
     function goHome(e){
       e?.preventDefault();

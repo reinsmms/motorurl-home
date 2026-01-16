@@ -107,3 +107,7 @@
   color:var(--accent);
 }
 .homeSectionLink:hover{text-decoration:underline}
+
+/* v3: nested tree spacing */
+.branch .branch__items .branchHeader{margin-left:6px}
+.branch .branch__items .branch__items{margin-left:18px}
