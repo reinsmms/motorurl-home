@@ -20,19 +20,20 @@
     try { frame.contentWindow?.postMessage({ type: "motorurl:pageMeta", meta }, "*"); } catch (_) {}
   }
 
+  function isExternalHref(href) {
+    return /^https?:\/\//i.test(href || "");
+  }
+
   function loadPage(href, label, meta) {
     frame.src = href;
     setBreadcrumb(href === HOME_HREF ? HOME_LABEL : (label || href));
 
-    // highlight leaf links only
     navHost.querySelectorAll("a.navItem").forEach(a => {
       a.removeAttribute("aria-current");
       if (a.getAttribute("data-href") === href) a.setAttribute("aria-current", "page");
     });
 
-    // Persist current page in hash so it can be bookmarked
     location.hash = encodeURIComponent(href);
-
     frame.onload = () => postPageMeta(meta || {});
   }
 
@@ -83,11 +84,14 @@
     if (found) {
       (found.parents || []).forEach(p => openBranchById(p.id, true));
       if (found.node?.type === "branch") openBranchById(found.node.id, true);
+
+      if (found.node?.external || isExternalHref(found.node?.href)) return true;
+
       loadPage(found.node.href, found.label, found.meta);
       return true;
     }
 
-    loadPage(href, href, {});
+    if (!isExternalHref(href)) loadPage(href, href, {});
     return true;
   }
 
@@ -122,7 +126,7 @@
         titleLink.textContent = node.title;
         titleLink.addEventListener("click", (e) => {
           e.preventDefault();
-          if (node.href) {
+          if (node.href && !isExternalHref(node.href)) {
             loadPage(node.href, node.title, { showGalleryLink: false });
           } else {
             toggleBranchById(node.id);
@@ -135,7 +139,6 @@
 
         const childrenEl = document.createElement("div");
         childrenEl.className = "branch__items";
-
         renderTree(node.children || [], childrenEl);
 
         branchEl.appendChild(header);
@@ -153,6 +156,13 @@
 
         a.addEventListener("click", (e) => {
           e.preventDefault();
+
+          if (node.external || isExternalHref(node.href)) {
+            window.open(node.href, "_blank", "noopener,noreferrer");
+            window.dispatchEvent(new CustomEvent("motorurl:navigate"));
+            return;
+          }
+
           loadPage(node.href, node.title, node);
           window.dispatchEvent(new CustomEvent("motorurl:navigate"));
         });

@@ -1,5 +1,6 @@
 # motorurl.com Home Starter (v4)
 
+## What you asked for (confirmed)
 - Default media types are fine (images/videos handled by generator)
 - No autoplay for video in lightbox
 - Gallery Index page that lists subject folders
