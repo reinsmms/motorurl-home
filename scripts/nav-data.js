@@ -20,6 +20,27 @@ window.MOTORURL_NAV = [
       },
       {
         "type": "branch",
+        "id": "geometry-modeling",
+        "title": "Geometry & Modeling Concepts",
+        "openByDefault": true,
+        "href": "pages/geometry-modeling-concepts.html",
+        "children": [
+          {
+            "type": "link",
+            "title": "Torus and Sweep \u2014 Definitions & Uses",
+            "href": "pages/torus-and-sweep.html",
+            "showGalleryLink": false
+          },
+          {
+            "type": "link",
+            "title": "Seal Math \u2014 Torus & Gasket Sizing",
+            "href": "pages/seal-math-torus-gasket-sizing.html",
+            "showGalleryLink": false
+          }
+        ]
+      },
+      {
+        "type": "branch",
         "id": "software",
         "title": "CAD and Slicer Software",
         "openByDefault": true,

@@ -3,10 +3,6 @@
     {
       "name": "3Dprinting",
       "path": "assets/3Dprinting"
-    },
-    {
-      "name": "example-subject",
-      "path": "assets/example-subject"
     }
   ]
 }
