@@ -111,3 +111,31 @@
 /* v3: nested tree spacing */
 .branch .branch__items .branchHeader{margin-left:6px}
 .branch .branch__items .branch__items{margin-left:18px}
+
+
+/* v7: fix nested branch toggle click area */
+.branchHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.branch__toggleBtn {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.branch__titleLink {
+  flex: 1 1 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* v7: nested header padding */
+.branch .branch__items .branchHeader{padding-left:6px; margin-left:0}
