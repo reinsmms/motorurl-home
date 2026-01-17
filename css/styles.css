@@ -139,3 +139,27 @@
 
 /* v7: nested header padding */
 .branch .branch__items .branchHeader{padding-left:6px; margin-left:0}
+
+
+/* v7b: force non-overlapping grid layout for branch headers */
+.branchHeader {
+  display: grid !important;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.branch__toggleBtn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  justify-self: start;
+  z-index: 5;
+}
+
+.branch__titleLink {
+  display: block;
+  z-index: 1;
+}
