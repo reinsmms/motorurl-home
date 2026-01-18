@@ -254,23 +254,35 @@ a { color: var(--text); }
 }
 
 
-/* v5: chevron on the right (FreeCAD-style) */
-.branchHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+/* v6: nav font scale for dense trees */
+/* Slightly reduce nav typography to accommodate denser trees across sites */
 .branch__titleLink {
-  flex: 1 1 auto;
-  order: 1;
+  font-size: 0.95rem;
 }
 
-.branch__toggleBtn {
-  flex: 0 0 auto;
-  order: 2;            /* push chevron to the right */
+.navItem {
+  font-size: 0.92rem;
+  line-height: 1.25;
 }
 
-.branch__toggleBtn .chev {
+/* Nested levels step down a touch more */
+.branch .branch__items .branch__titleLink {
+  font-size: 0.92rem;
+}
+
+.branch .branch__items .navItem {
+  font-size: 0.9rem;
+}
+
+
+/* v7: chevron direction + animation */
+.chev {
   display: inline-block;
+  transition: transform 120ms ease;
+  transform: rotate(0deg); /* right-pointing when collapsed */
+  transform-origin: 50% 50%;
+}
+
+.branch[data-open="true"] > .branchHeader .chev {
+  transform: rotate(90deg); /* down when expanded */
 }

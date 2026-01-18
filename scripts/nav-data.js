@@ -9,7 +9,7 @@ window.MOTORURL_NAV = [
     "type": "branch",
     "id": "printing",
     "title": "3D Printing",
-    "openByDefault": true,
+    "openByDefault": false,
     "href": "pages/3d-printing.html",
     "children": [
       {
@@ -22,7 +22,7 @@ window.MOTORURL_NAV = [
         "type": "branch",
         "id": "geometry-modeling",
         "title": "Geometry & Modeling Concepts",
-        "openByDefault": true,
+        "openByDefault": false,
         "href": "pages/geometry-modeling-concepts.html",
         "children": [
           {
@@ -43,7 +43,7 @@ window.MOTORURL_NAV = [
         "type": "branch",
         "id": "software",
         "title": "CAD and Slicer Software",
-        "openByDefault": true,
+        "openByDefault": false,
         "children": [
           {
             "type": "link",
@@ -63,7 +63,7 @@ window.MOTORURL_NAV = [
         "type": "branch",
         "id": "filament",
         "title": "Filament",
-        "openByDefault": true,
+        "openByDefault": false,
         "href": "pages/filament.html",
         "children": [
           {
