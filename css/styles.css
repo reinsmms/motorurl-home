@@ -30,7 +30,7 @@
 .branch[data-open="true"] .chev{transform:rotate(90deg)}
 .branch__title{font-weight:600;font-size:13px}
 .branch__items{margin:6px 0 0 26px;display:none;border-left:1px solid var(--line);padding-left:10px}
-.branch[data-open="true"] .branch__items{display:grid;gap:4px}
+.branch[data-open="true"] > .branch__items{display:grid;gap:4px}
 .navItem{display:block;padding:7px 10px;border-radius:10px;color:var(--text);text-decoration:none;border:1px solid transparent}
 .navItem:hover{background:var(--hover);border-color:var(--line)}
 .navItem[aria-current="page"]{border-color:rgba(106,169,255,.55);background:rgba(106,169,255,.10)}
@@ -112,54 +112,5 @@
 .branch .branch__items .branchHeader{margin-left:6px}
 .branch .branch__items .branch__items{margin-left:18px}
 
-
-/* v7: fix nested branch toggle click area */
-.branchHeader {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  position: relative;
-}
-
-.branch__toggleBtn {
-  flex: 0 0 auto;
-  width: 28px;
-  height: 28px;
-  display: grid;
-  place-items: center;
-  position: relative;
-  z-index: 3;
-}
-
-.branch__titleLink {
-  flex: 1 1 auto;
-  position: relative;
-  z-index: 2;
-}
-
-/* v7: nested header padding */
-.branch .branch__items .branchHeader{padding-left:6px; margin-left:0}
-
-
-/* v7b: force non-overlapping grid layout for branch headers */
-.branchHeader {
-  display: grid !important;
-  grid-template-columns: 28px 1fr;
-  gap: 8px;
-  align-items: center;
-}
-
-.branch__toggleBtn {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  justify-self: start;
-  z-index: 5;
-}
-
-.branch__titleLink {
-  display: block;
-  z-index: 1;
-}
+/* v7c: local chev rotation for nested branches */
+.branch[data-open="true"] > .branchHeader .chev{transform:rotate(90deg)}
