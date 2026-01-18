@@ -252,3 +252,25 @@ a { color: var(--text); }
   border-color: rgba(25,255,122,.22);
   background: rgba(25,255,122,.06);
 }
+
+
+/* v5: chevron on the right (FreeCAD-style) */
+.branchHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.branch__titleLink {
+  flex: 1 1 auto;
+  order: 1;
+}
+
+.branch__toggleBtn {
+  flex: 0 0 auto;
+  order: 2;            /* push chevron to the right */
+}
+
+.branch__toggleBtn .chev {
+  display: inline-block;
+}
