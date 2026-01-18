@@ -1,3 +1,19 @@
+
+/* motorurl theme variables */
+:root {
+  --bg: #070a0f;
+  --panel: #0b1018;
+  --panel2: #0f1622;
+  --text: #e7eefc;
+  --muted: #9aa8c2;
+  --line: rgba(255,255,255,.08);
+  --accent: #19ff7a;          /* neon green */
+  --accent2: rgba(25,255,122,.18);
+  --accent3: rgba(25,255,122,.35);
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
+  --radius: 14px;
+}
+
 /* motorurl.com starter home layout (v4)
    - Sidebar tree nav (left) with collapse/expand
    - Iframe content frame (right)
@@ -114,3 +130,125 @@
 
 /* v7c: local chev rotation for nested branches */
 .branch[data-open="true"] > .branchHeader .chev{transform:rotate(90deg)}
+
+
+/* v4: reskin sidebar + nav (neon) */
+html, body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--text); }
+
+.muted { color: var(--muted); }
+
+/* Sidebar */
+.sidebar {
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  border-right: 1px solid var(--line);
+}
+
+.sidebar__top {
+  background: rgba(255,255,255,.02);
+  border-bottom: 1px solid var(--line);
+}
+
+.brandCard {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.brandCard:hover { border-color: rgba(25,255,122,.22); }
+
+.brandCard__title { color: var(--text); }
+
+.brandCard__home { color: var(--accent); }
+
+.branchHeader {
+  border-radius: 10px;
+  padding: 8px 8px;
+}
+
+.branch__titleLink {
+  color: var(--text);
+  opacity: .92;
+}
+
+.branch__titleLink:hover { opacity: 1; }
+
+.branch__toggleBtn {
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.branch__toggleBtn:hover {
+  border-color: rgba(25,255,122,.22);
+  background: rgba(25,255,122,.06);
+}
+
+.branch[data-open="true"] > .branchHeader .chev { transform: rotate(90deg); }
+
+.navItem {
+  display: block;
+  padding: 10px 10px;
+  border-radius: 12px;
+  margin: 4px 0;
+  border: 1px solid transparent;
+  color: var(--text);
+  opacity: .88;
+}
+
+.navItem:hover {
+  opacity: 1;
+  border-color: rgba(25,255,122,.18);
+  background: rgba(255,255,255,.03);
+}
+
+.navItem[aria-current="page"] {
+  opacity: 1;
+  border-color: var(--accent3);
+  background: rgba(25,255,122,.08);
+  box-shadow: 0 0 0 1px rgba(25,255,122,.15), 0 0 18px rgba(25,255,122,.10);
+}
+
+.navItem[aria-current="page"]::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Hamburger / mobile drawer */
+.hamburger {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  color: var(--text);
+}
+.hamburger:hover { border-color: rgba(25,255,122,.22); }
+
+.sidebarOverlay { background: rgba(0,0,0,.55); }
+
+/* Page cards */
+.pageCard {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.pillLink {
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+  color: var(--text);
+}
+.pillLink:hover {
+  border-color: rgba(25,255,122,.22);
+  background: rgba(25,255,122,.06);
+}
