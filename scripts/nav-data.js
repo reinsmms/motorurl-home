@@ -2,7 +2,7 @@
 // True nested tree structure.
 // Node types:
 //  - { type:'branch', id, title, href?, openByDefault?, children:[...] }
-//  - { type:'link', title, href, external?, galleryPath?, showGalleryLink? }
+//  - { type:'link', title, subtitle?, href, external?, galleryPath?, showGalleryLink? }
 
 window.MOTORURL_NAV = [
   {
@@ -17,26 +17,6 @@ window.MOTORURL_NAV = [
         "title": "Printing Gallery",
         "href": "pages/gallery-index.html",
         "showGalleryLink": false
-      },
-      {
-        "type": "branch",
-        "id": "software",
-        "title": "CAD/Slicing Software Manuals",
-        "openByDefault": false,
-        "children": [
-          {
-            "type": "link",
-            "title": "FreeCAD for Beginners",
-            "href": "https://freecad.motorurl.com",
-            "external": true
-          },
-          {
-            "type": "link",
-            "title": "Bambu Studio for Beginners",
-            "href": "https://bambu.motorurl.com",
-            "external": true
-          }
-        ]
       },
       {
         "type": "branch",
@@ -73,6 +53,28 @@ window.MOTORURL_NAV = [
             "showGalleryLink": false
           }
         ]
+      }
+    ]
+  },
+  {
+    "type": "branch",
+    "id": "software",
+    "title": "CAD/Slicing Software Manuals",
+    "openByDefault": true,
+    "children": [
+      {
+        "type": "link",
+        "title": "FreeCAD for Beginners",
+        "href": "https://freecad.motorurl.com",
+        "external": true,
+        "subtitle": "freecad.motorurl.com"
+      },
+      {
+        "type": "link",
+        "title": "Bambu Studio for Beginners",
+        "href": "https://bambu-studio.motorurl.com",
+        "external": true,
+        "subtitle": "bambu-studio.motorurl.com"
       }
     ]
   }

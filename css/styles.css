@@ -310,3 +310,17 @@ a { color: var(--text); }
 .branch[data-open="true"] > .branchHeader .chev {
   transform: rotate(90deg); /* down when expanded */
 }
+
+
+/* v9: nav subtitle styling */
+.navTitle {
+  display: block;
+}
+
+.navSub {
+  display: block;
+  font-size: 0.82em;
+  opacity: 0.75;
+  color: var(--muted);
+  margin-top: 2px;
+}
