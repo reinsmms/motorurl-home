@@ -2,7 +2,7 @@
 // True nested tree structure.
 // Node types:
 //  - { type:'branch', id, title, href?, openByDefault?, children:[...] }
-//  - { type:'link', title, subtitle?, href, external?, galleryPath?, showGalleryLink? }
+//  - { type:'link', title, href, external?, galleryPath?, showGalleryLink? }
 
 window.MOTORURL_NAV = [
   {
@@ -64,17 +64,15 @@ window.MOTORURL_NAV = [
     "children": [
       {
         "type": "link",
-        "title": "FreeCAD for Beginners",
+        "title": "freecad.motorurl.com",
         "href": "https://freecad.motorurl.com",
-        "external": true,
-        "subtitle": "freecad.motorurl.com"
+        "external": true
       },
       {
         "type": "link",
-        "title": "Bambu Studio for Beginners",
+        "title": "bambu-studio.motorurl.com",
         "href": "https://bambu-studio.motorurl.com",
-        "external": true,
-        "subtitle": "bambu-studio.motorurl.com"
+        "external": true
       }
     ]
   }
