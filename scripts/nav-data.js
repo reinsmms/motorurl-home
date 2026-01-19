@@ -51,6 +51,11 @@ window.MOTORURL_NAV = [
             "title": "Material Resistance - Quick Reference",
             "href": "pages/material-resistance-quick-reference.html",
             "showGalleryLink": false
+          },
+          {
+            "type": "link",
+            "title": "Filament Drying Guide",
+            "href": "pages/filament-drying-guide.html"
           }
         ]
       }
