@@ -9,7 +9,7 @@ window.MOTORURL_NAV = [
     "type": "branch",
     "id": "printing",
     "title": "3D Printing",
-    "openByDefault": false,
+    "openByDefault": true,
     "href": "pages/3d-printing.html",
     "children": [
       {
@@ -17,6 +17,26 @@ window.MOTORURL_NAV = [
         "title": "Printing Gallery",
         "href": "pages/gallery-index.html",
         "showGalleryLink": false
+      },
+      {
+        "type": "branch",
+        "id": "software",
+        "title": "CAD/Slicing Software Manuals",
+        "openByDefault": false,
+        "children": [
+          {
+            "type": "link",
+            "title": "FreeCAD for Beginners",
+            "href": "https://freecad.motorurl.com",
+            "external": true
+          },
+          {
+            "type": "link",
+            "title": "Bambu Studio for Beginners",
+            "href": "https://bambu.motorurl.com",
+            "external": true
+          }
+        ]
       },
       {
         "type": "branch",
@@ -36,26 +56,6 @@ window.MOTORURL_NAV = [
             "title": "Seal Math \u2014 Torus & Gasket Sizing",
             "href": "pages/seal-math-torus-gasket-sizing.html",
             "showGalleryLink": false
-          }
-        ]
-      },
-      {
-        "type": "branch",
-        "id": "software",
-        "title": "CAD and Slicer Software",
-        "openByDefault": false,
-        "children": [
-          {
-            "type": "link",
-            "title": "FreeCAD for Beginners",
-            "href": "https://freecad.motorurl.com",
-            "external": true
-          },
-          {
-            "type": "link",
-            "title": "Bambu Studio for Beginners",
-            "href": "https://bambu.motorurl.com",
-            "external": true
           }
         ]
       },

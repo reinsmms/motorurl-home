@@ -117,7 +117,7 @@
 
         const chev = document.createElement("span");
         chev.className = "chev";
-        chev.textContent = "▶";
+        chev.textContent = "";
         toggleBtn.appendChild(chev);
 
         const titleLink = document.createElement("a");

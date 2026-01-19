@@ -43,7 +43,7 @@
 .branch__toggle:hover{background:var(--hover);border-color:var(--line)}
 .branch__toggle:focus-visible{outline:none;box-shadow:0 0 0 3px var(--focus)}
 .chev{width:18px;height:18px;display:grid;place-items:center;color:var(--muted);user-select:none}
-.branch[data-open="true"] .chev{transform:rotate(90deg)}
+.branch[data-open="true"] .chev { display:inline-block; transition: transform 120ms ease; transform: rotate(0deg); transform-origin: 50% 50%; }
 .branch__title{font-weight:600;font-size:13px}
 .branch__items{margin:6px 0 0 26px;display:none;border-left:1px solid var(--line);padding-left:10px}
 .branch[data-open="true"] > .branch__items{display:grid;gap:4px}
@@ -129,7 +129,7 @@
 .branch .branch__items .branch__items{margin-left:18px}
 
 /* v7c: local chev rotation for nested branches */
-.branch[data-open="true"] > .branchHeader .chev{transform:rotate(90deg)}
+.branch[data-open="true"] > .branchHeader .chev { display:inline-block; transition: transform 120ms ease; transform: rotate(0deg); transform-origin: 50% 50%; }
 
 
 /* v4: reskin sidebar + nav (neon) */
@@ -189,7 +189,7 @@ a { color: var(--text); }
   background: rgba(25,255,122,.06);
 }
 
-.branch[data-open="true"] > .branchHeader .chev { transform: rotate(90deg); }
+.branch[data-open="true"] > .branchHeader .chev { display:inline-block; transition: transform 120ms ease; transform: rotate(0deg); transform-origin: 50% 50%; }
 
 .navItem {
   display: block;
@@ -281,6 +281,30 @@ a { color: var(--text); }
   transition: transform 120ms ease;
   transform: rotate(0deg); /* right-pointing when collapsed */
   transform-origin: 50% 50%;
+}
+
+.branch[data-open="true"] > .branchHeader .chev { display:inline-block; transition: transform 120ms ease; transform: rotate(0deg); transform-origin: 50% 50%; }
+
+
+/* v8: chevron glyph + rotation (CSS pseudo-element) */
+.chev {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.1em;
+  line-height: 1.1em;
+  color: var(--muted);
+  transition: transform 120ms ease, color 120ms ease;
+  transform: rotate(0deg); /* right when collapsed */
+  transform-origin: 50% 50%;
+}
+
+.chev::before {
+  content: "▶";
+  display: inline-block;
+}
+
+.branch__toggleBtn:hover .chev {
+  color: var(--accent);
 }
 
 .branch[data-open="true"] > .branchHeader .chev {
