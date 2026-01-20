@@ -1,10 +1,28 @@
 // scripts/nav-data.js
-// True nested tree structure.
-// Node types:
-//  - { type:'branch', id, title, href?, openByDefault?, children:[...] }
-//  - { type:'link', title, href, external?, galleryPath?, showGalleryLink? }
 
 window.MOTORURL_NAV = [
+  {
+    "type": "branch",
+    "id": "bambu-a1-operations",
+    "title": "Bambu A1 Operations",
+    "href": "pages/bambu-a1-operations.html",
+    "openByDefault": true,
+    "children": [
+      {
+        "type": "branch",
+        "id": "a1-print-recovery",
+        "title": "Print Recovery & Interruption Handling",
+        "openByDefault": true,
+        "children": [
+          {
+            "type": "link",
+            "title": "Recovering from Filament Runout When the A1 Is Already Paused",
+            "href": "pages/a1-recovering-from-filament-runout-while-paused.html"
+          }
+        ]
+      }
+    ]
+  },
   {
     "type": "branch",
     "id": "printing",
