@@ -348,3 +348,15 @@ a { color: var(--text); }
 }
 .dataTable tr:last-child td { border-bottom: none; }
 .dataTable.compact th, .dataTable.compact td { padding: 8px 10px; }
+
+
+/* v11: larger hamburger */
+#hamburgerBtn, .hamburgerBtn, .hamburger {
+  width: 48px;
+  height: 48px;
+  font-size: 1.35rem;
+}
+#hamburgerBtn svg, .hamburger svg {
+  width: 24px;
+  height: 24px;
+}

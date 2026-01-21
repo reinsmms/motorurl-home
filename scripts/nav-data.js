@@ -66,14 +66,103 @@ window.MOTORURL_NAV = [
         "children": [
           {
             "type": "link",
-            "title": "Material Resistance - Quick Reference",
-            "href": "pages/material-resistance-quick-reference.html",
-            "showGalleryLink": false
+            "title": "Filament (Overview)",
+            "href": "pages/filament.html"
           },
           {
-            "type": "link",
-            "title": "Filament Drying Guide",
-            "href": "pages/filament-drying-guide.html"
+            "type": "branch",
+            "id": "filament-basics",
+            "title": "Filament Basics & Properties",
+            "children": [
+              {
+                "type": "link",
+                "title": "Filament Basics and Properties",
+                "href": "pages/filament-basics-and-properties.html"
+              }
+            ]
+          },
+          {
+            "type": "branch",
+            "id": "filament-care",
+            "title": "Filament Preparation & Care",
+            "children": [
+              {
+                "type": "link",
+                "title": "Filament Preparation and Care",
+                "href": "pages/filament-preparation-and-care.html"
+              },
+              {
+                "type": "link",
+                "title": "Filament Drying and Storage",
+                "href": "pages/filament-drying-and-storage.html"
+              },
+              {
+                "type": "link",
+                "title": "Filament Handling and Recovery",
+                "href": "pages/filament-handling-and-recovery.html"
+              }
+            ]
+          },
+          {
+            "type": "branch",
+            "id": "filament-appearance",
+            "title": "Filament Finishes & Appearance",
+            "children": [
+              {
+                "type": "link",
+                "title": "Filament Finishes and Appearance",
+                "href": "pages/filament-finishes-and-appearance.html"
+              },
+              {
+                "type": "link",
+                "title": "Filament Finishes and Styles",
+                "href": "pages/filament-finishes-and-styles.html"
+              },
+              {
+                "type": "link",
+                "title": "Filament Colors Popularity Rankings",
+                "href": "pages/filament-colors-popularity-rankings.html"
+              }
+            ]
+          },
+          {
+            "type": "branch",
+            "id": "filament-buying",
+            "title": "Filament Selection & Buying",
+            "children": [
+              {
+                "type": "link",
+                "title": "Filament Selection and Buying",
+                "href": "pages/filament-selection-and-buying.html"
+              },
+              {
+                "type": "link",
+                "title": "Where to Buy Filament",
+                "href": "pages/where-to-buy-filament.html"
+              }
+            ]
+          },
+          {
+            "type": "branch",
+            "id": "filament-reference",
+            "title": "Filament Reference Tables",
+            "children": [
+              {
+                "type": "link",
+                "title": "Filament Reference Tables",
+                "href": "pages/filament-reference-tables.html"
+              },
+              {
+                "type": "link",
+                "title": "Filament Brands Quality Ranking",
+                "href": "pages/filament-brands-quality-ranking.html"
+              },
+              {
+                "type": "link",
+                "title": "Filament Colors Popularity Rankings",
+                "href": "pages/filament-colors-popularity-rankings.html"
+              }
+            ]
           }
         ]
       }
