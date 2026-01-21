@@ -1,20 +1,3 @@
-
-// Navigate iframe to a page and force the content to start at the top.
-// Without this, the iframe can keep the previous scroll position in some browsers.
-function navigateTo(href) {
-  const frame = document.getElementById('contentFrame');
-  if (!frame) return;
-
-  // Best-effort: reset old page position immediately
-  try { frame.contentWindow && frame.contentWindow.scrollTo(0, 0); } catch (_) {}
-
-  navigateTo(href);
-
-  frame.addEventListener('load', () => {
-    try { frame.contentWindow && frame.contentWindow.scrollTo(0, 0); } catch (_) {}
-  }, { once: true });
-}
-
 // scripts/nav.js
 (function () {
   const navHost = document.getElementById("treeNav");
@@ -42,7 +25,7 @@ function navigateTo(href) {
   }
 
   function loadPage(href, label, meta) {
-    navigateTo(href);
+    frame.src = href;
     setBreadcrumb(href === HOME_HREF ? HOME_LABEL : (label || href));
 
     navHost.querySelectorAll("a.navItem").forEach(a => {
@@ -112,7 +95,7 @@ function navigateTo(href) {
     return true;
   }
 
-  function renderTree(nodes, container, level = 0) {
+  function renderTree(nodes, container) {
     nodes.forEach(node => {
       if (!node) return;
 
@@ -207,18 +190,3 @@ function navigateTo(href) {
   window.addEventListener("hashchange", () => applyHashIfPresent());
   render();
 })();
-
-  function collapseOtherRoots(exceptId) {
-    const rootToggles = document.querySelectorAll('#treeNav button.tree__toggle[data-level="0"]');
-    rootToggles.forEach(btn => {
-      const branchId = btn.dataset.branchId;
-      if (!branchId || branchId === exceptId) return;
-      state.open[branchId] = false;
-      btn.setAttribute('aria-expanded', 'false');
-      const li = btn.closest('li');
-      if (li) li.classList.remove('is-open');
-    });
-    saveState();
-  }
-
-
