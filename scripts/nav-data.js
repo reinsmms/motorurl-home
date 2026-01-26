@@ -3,57 +3,64 @@
 window.MOTORURL_NAV = [
   {
     "type": "branch",
-    "id": "bambu-a1-operations",
-    "title": "Bambu A1 Operations",
-    "href": "pages/bambu-a1-operations.html",
+    "id": "making-fabrication",
+    "title": "Making & Fabrication",
+    "href": "pages/making-and-fabrication.html",
     "openByDefault": true,
     "children": [
       {
         "type": "branch",
-        "id": "a1-print-recovery",
-        "title": "Print Recovery & Interruption Handling",
-        "openByDefault": true,
-        "children": [
-          {
-            "type": "link",
-            "title": "Recovering from Filament Runout When the A1 Is Already Paused",
-            "href": "pages/a1-recovering-from-filament-runout-while-paused.html"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "branch",
-    "id": "printing",
-    "title": "3D Printing",
-    "openByDefault": true,
-    "href": "pages/3d-printing.html",
-    "children": [
-      {
-        "type": "link",
-        "title": "Printing Gallery",
-        "href": "pages/gallery-index.html",
-        "showGalleryLink": false
-      },
-      {
-        "type": "branch",
-        "id": "geometry-modeling",
-        "title": "Geometry & Modeling Concepts",
+        "id": "printers",
+        "title": "Printers",
+        "href": "pages/printers.html",
         "openByDefault": false,
-        "href": "pages/geometry-modeling-concepts.html",
         "children": [
           {
             "type": "link",
-            "title": "Torus and Sweep \u2014 Definitions & Uses",
-            "href": "pages/torus-and-sweep.html",
-            "showGalleryLink": false
+            "title": "Printing Overview",
+            "href": "pages/printing-overview.html"
           },
           {
             "type": "link",
-            "title": "Seal Math \u2014 Torus & Gasket Sizing",
-            "href": "pages/seal-math-torus-gasket-sizing.html",
+            "title": "Printing Notes",
+            "href": "pages/printing-notes.html"
+          },
+          {
+            "type": "link",
+            "title": "Printing Gallery",
+            "href": "pages/gallery-index.html",
             "showGalleryLink": false
+          }
+        ]
+      },
+      {
+        "type": "branch",
+        "id": "operations",
+        "title": "Operations",
+        "href": "pages/operations.html",
+        "openByDefault": false,
+        "children": [
+          {
+            "type": "branch",
+            "id": "bambu-a1-operations",
+            "title": "Bambu A1 Operations",
+            "href": "pages/bambu-a1-operations.html",
+            "openByDefault": true,
+            "children": [
+              {
+                "type": "branch",
+                "id": "a1-print-recovery",
+                "title": "Print Recovery & Interruption Handling",
+                "openByDefault": true,
+                "children": [
+                  {
+                    "type": "link",
+                    "title": "Recovering from Filament Runout When the A1 Is Already Paused",
+                    "href": "pages/a1-recovering-from-filament-runout-while-paused.html"
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -165,6 +172,70 @@ window.MOTORURL_NAV = [
             ]
           }
         ]
+      }
+    ]
+  },
+  {
+    "type": "branch",
+    "id": "modeling-geometry",
+    "title": "Modeling & Geometry",
+    "href": "pages/modeling-and-geometry.html",
+    "openByDefault": true,
+    "children": [
+      {
+        "type": "branch",
+        "id": "geometry-modeling",
+        "title": "Geometry & Modeling Concepts",
+        "openByDefault": false,
+        "href": "pages/geometry-modeling-concepts.html",
+        "children": [
+          {
+            "type": "link",
+            "title": "Torus and Sweep — Definitions & Uses",
+            "href": "pages/torus-and-sweep.html",
+            "showGalleryLink": false
+          },
+          {
+            "type": "link",
+            "title": "Seal Math — Torus & Gasket Sizing",
+            "href": "pages/seal-math-torus-gasket-sizing.html",
+            "showGalleryLink": false
+          }
+        ]
+      },
+      {
+        "type": "link",
+        "title": "Tolerances & Fit",
+        "href": "pages/tolerances-and-fit.html"
+      },
+      {
+        "type": "link",
+        "title": "Units, Scale, Precision",
+        "href": "pages/units-scale-precision.html"
+      }
+    ]
+  },
+  {
+    "type": "branch",
+    "id": "industry-insights",
+    "title": "Industry Insights",
+    "href": "pages/industry-insights.html",
+    "openByDefault": true,
+    "children": [
+      {
+        "type": "link",
+        "title": "History of 3D Printing",
+        "href": "pages/history-of-3d-printing.html"
+      },
+      {
+        "type": "link",
+        "title": "Market Cycles & Availability",
+        "href": "pages/market-cycles-and-availability.html"
+      },
+      {
+        "type": "link",
+        "title": "Hardware Ecosystems (Open vs Closed)",
+        "href": "pages/hardware-ecosystems.html"
       }
     ]
   },
