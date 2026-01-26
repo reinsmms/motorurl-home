@@ -34,7 +34,10 @@
     });
 
     location.hash = encodeURIComponent(href);
-    frame.onload = () => postPageMeta(meta || {});
+    frame.onload = () => {
+      try { frame.contentWindow?.scrollTo(0, 0); } catch (_) {}
+      postPageMeta(meta || {});
+    };
   }
 
   function openBranchById(id, open) {
