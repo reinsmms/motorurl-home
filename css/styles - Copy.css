@@ -439,27 +439,3 @@ a { color: var(--text); }
 .branch[data-open="true"] > .branch__items{
   gap:0;
 }
-
-/* ============================================================
-   Nav Density – Microsoft Learn style (v3) FONT -1px (override)
-   Fix: ensure ALL nav levels honor the reduced font sizes by
-        overriding any earlier nested selectors.
-   Added: 2026-02-07
-   ============================================================ */
-
-.branchHeader .branch__titleLink{
-  font-size:13px !important;
-  line-height:25.6px !important;
-}
-
-/* Leaf items (all levels) */
-#treeNav .navItem{
-  font-size:12px !important;
-  line-height:22px !important;
-}
-
-/* If any nested rule targets nav items, override it too */
-#treeNav .branch .branch__items .navItem{
-  font-size:12px !important;
-  line-height:22px !important;
-}
