@@ -5,17 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>motorurl.com</title>
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/header.css" />
 </head>
 <body>
+  <div id="header-include"></div>
+
   <div class="app">
     <aside class="sidebar" aria-label="Site navigation" id="sidebar">
-      <div class="brand">
-        <a class="brand__logo" href="#" id="homeLink" title="Home" aria-label="Home"></a>
-        <div class="brand__text">
-          <div class="brand__title">motorurl.com</div>
-          <a class="brand__homeLink" href="#" id="homeTextLink">Home</a>
-        </div>
-      </div>
 
       <nav id="treeNav" class="tree" aria-label="Navigation tree"></nav>
 
@@ -33,6 +29,13 @@
       <iframe id="contentFrame" class="contentFrame" title="Content frame" src="pages/home.html" loading="lazy"></iframe>
     </main>
   </div>
+  <script>
+    // Part 03: load shared header include (Live Server + Cloudflare compatible)
+    fetch('includes/header.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('header-include').innerHTML = html; })
+      .catch(() => { /* fail silently */ });
+  </script>
 
   <script src="scripts/nav-data.js"></script>
   <script src="scripts/nav.js"></script>
