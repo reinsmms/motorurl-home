@@ -6,15 +6,16 @@
   <title>motorurl.com</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/sidebar-title.css" />
 </head>
 <body>
+
   <div id="header-include"></div>
 
   <div class="app">
     <aside class="sidebar" aria-label="Site navigation" id="sidebar">
-
+      <div class="sidebarSectionTitle">3D PRINTING</div>
       <nav id="treeNav" class="tree" aria-label="Navigation tree"></nav>
-
       <div class="sidebar__footer">
         <span class="muted"></span>
       </div>
@@ -25,16 +26,15 @@
         <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false">☰</button>
         <div id="breadcrumb" class="breadcrumb">Home</div>
       </div>
-
       <iframe id="contentFrame" class="contentFrame" title="Content frame" src="pages/home.html" loading="lazy"></iframe>
     </main>
   </div>
+
   <script>
-    // Part 03: load shared header include (Live Server + Cloudflare compatible)
     fetch('includes/header.html')
       .then(r => r.text())
-      .then(html => { document.getElementById('header-include').innerHTML = html; })
-      .catch(() => { /* fail silently */ });
+      .then(h => document.getElementById('header-include').innerHTML = h)
+      .catch(()=>{});
   </script>
 
   <script src="scripts/nav-data.js"></script>

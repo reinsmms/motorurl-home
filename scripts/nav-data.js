@@ -6,7 +6,7 @@ window.MOTORURL_NAV = [
     "id": "making-fabrication",
     "title": "Making & Fabrication",
     "href": "pages/making-and-fabrication.html",
-    "openByDefault": true,
+    "openByDefault": false,
     "children": [
       {
         "type": "branch",
@@ -45,13 +45,13 @@ window.MOTORURL_NAV = [
             "id": "bambu-a1-operations",
             "title": "Bambu A1 Operations",
             "href": "pages/bambu-a1-operations.html",
-            "openByDefault": true,
+            "openByDefault": false,
             "children": [
               {
                 "type": "branch",
                 "id": "a1-print-recovery",
                 "title": "Print Recovery & Interruption Handling",
-                "openByDefault": true,
+                "openByDefault": false,
                 "children": [
                   {
                     "type": "link",
@@ -180,7 +180,7 @@ window.MOTORURL_NAV = [
     "id": "modeling-geometry",
     "title": "Modeling & Geometry",
     "href": "pages/modeling-and-geometry.html",
-    "openByDefault": true,
+    "openByDefault": false,
     "children": [
       {
         "type": "branch",
@@ -220,7 +220,7 @@ window.MOTORURL_NAV = [
     "id": "industry-insights",
     "title": "Industry Insights",
     "href": "pages/industry-insights.html",
-    "openByDefault": true,
+    "openByDefault": false,
     "children": [
       {
         "type": "link",
@@ -243,7 +243,7 @@ window.MOTORURL_NAV = [
     "type": "branch",
     "id": "software",
     "title": "CAD/Slicing Software Manuals",
-    "openByDefault": true,
+    "openByDefault": false,
     "children": [
       {
         "type": "link",
