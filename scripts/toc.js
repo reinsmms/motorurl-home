@@ -1,46 +1,63 @@
-// scripts/toc.js
-// Auto-generate a Contents list from H2/H3 headings
-(() => {
-  const toc = document.querySelector('[data-toc]');
-  if (!toc) return;
+// Part 03: TOC controller (parent page)
+(function () {
+  const frame = document.getElementById('contentFrame');
+  const tocPanel = document.getElementById('tocPanel');
+  const tocList = document.getElementById('tocList');
+  const tocToggle = document.getElementById('tocToggle');
 
-  const content = document.querySelector('.pageCard') || document.querySelector('.page') || document.querySelector('main') || document.body;
-  const headings = content.querySelectorAll('h2, h3');
-  if (!headings.length) return;
+  function clearToc() {
+    if (tocList) tocList.innerHTML = '';
+  }
 
-  const usedIds = new Set();
-  const makeId = (txt) => {
-    let id = txt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    if (!id) id = 'section';
-    const base = id;
-    let i = 2;
-    while (usedIds.has(id) || document.getElementById(id)) id = `${base}-${i++}`;
-    usedIds.add(id);
-    return id;
-  };
+  function renderToc(payload) {
+    if (!tocList) return;
+    clearToc();
 
-  const ul = document.createElement('ul');
-  ul.className = 'toc-list';
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    if (!items.length) return;
 
-  headings.forEach(h => {
-    const label = h.textContent.trim();
-    if (!h.id) h.id = makeId(label);
+    const frag = document.createDocumentFragment();
+    items.forEach(it => {
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = it.text || '';
+      a.dataset.tocId = it.id;
+      if (it.level === 3) a.classList.add('tocItem--h3');
 
-    const li = document.createElement('li');
-    li.className = `toc-${h.tagName.toLowerCase()}`;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (frame && frame.contentWindow) {
+          frame.contentWindow.postMessage({ type: 'motorurl:scrollTo', id: it.id }, '*');
+        }
+      });
 
-    const a = document.createElement('a');
-    a.href = `#${h.id}`;
-    a.textContent = label;
+      frag.appendChild(a);
+    });
 
-    li.appendChild(a);
-    ul.appendChild(li);
+    tocList.appendChild(frag);
+  }
+
+  window.addEventListener('message', (e) => {
+    if (!e || !e.data) return;
+    if (e.data.type === 'motorurl:toc') renderToc(e.data);
   });
 
-  const title = document.createElement('div');
-  title.className = 'toc-title';
-  title.textContent = 'Contents';
+  // Request TOC whenever iframe loads a new page
+  if (frame) {
+    frame.addEventListener('load', () => {
+      clearToc();
+      try {
+        frame.contentWindow.postMessage({ type: 'motorurl:requestToc' }, '*');
+      } catch (_) {}
+    });
+  }
 
-  toc.appendChild(title);
-  toc.appendChild(ul);
+  // Toggle (only really needed on narrow screens; harmless otherwise)
+  if (tocToggle && tocPanel) {
+    tocToggle.addEventListener('click', () => {
+      const isHidden = getComputedStyle(tocPanel).display === 'none';
+      tocPanel.style.display = isHidden ? 'block' : 'none';
+      tocToggle.setAttribute('aria-expanded', String(isHidden));
+    });
+  }
 })();

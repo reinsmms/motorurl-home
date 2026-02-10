@@ -10,8 +10,8 @@ window.MOTORURL_NAV = [
     "children": [
       {
         "type": "link",
-        "title": "Printing Overview",
-        "href": "pages/printing-overview.html"
+        "title": "Intro to 3D Printers",
+        "href": "pages/intro-3d-printers.html"
       },
       {
         "type": "link",
