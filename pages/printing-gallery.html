@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Printing Gallery</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.gallery video {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.gallery-title {
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="gallery-title">Printing Gallery</div>
+
+<div id="gallery" class="gallery"></div>
+
+<script>
+fetch("../assets/3Dprinting/manifest.json")
+  .then(r => r.json())
+  .then(manifest => {
+    const gallery = document.getElementById("gallery");
+    const items = manifest.items || [];
+
+    items.forEach(item => {
+      if (item.type !== "video") return;
+
+      const wrap = document.createElement("div");
+
+      const title = document.createElement("div");
+      title.textContent = item.file;
+      title.style.marginBottom = "8px";
+      title.style.fontSize = "14px";
+
+      const video = document.createElement("video");
+      video.src = "../assets/3Dprinting/" + item.file;
+      video.controls = true;
+      video.preload = "metadata";
+
+      wrap.appendChild(title);
+      wrap.appendChild(video);
+      gallery.appendChild(wrap);
+    });
+  })
+  .catch(err => {
+    document.getElementById("gallery").innerHTML =
+      "<p>Could not load gallery manifest.</p>";
+    console.error(err);
+  });
+</script>
+
+</body>
+</html>

@@ -21,7 +21,8 @@ window.MOTORURL_NAV = [
       {
         "type": "link",
         "title": "Printing Gallery",
-        "href": "pages/gallery-index.html",
+        //"href": "pages/gallery-index.html",
+       "href": "pages/printing-gallery.html",
         "showGalleryLink": false
       }
     ]
